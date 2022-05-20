@@ -19,7 +19,7 @@ class API {
   int? get authTokenExpire => _authTokenExpire;
 
   BaseOptions options = BaseOptions(
-    baseUrl: 'https://admin.hdnmetatech.com',
+    baseUrl: 'https://api.endpoint.com',
   );
 
   setAuth({String? authType, String? accessToken, int? expire}) {
