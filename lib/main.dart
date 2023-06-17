@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:zulhijaya_task_project/controllers/quran_controller.dart';
-import 'package:zulhijaya_task_project/controllers/surah_controller.dart';
-import 'package:zulhijaya_task_project/routes.dart';
+import 'package:ikram_task_project/controllers/quran_controller.dart';
+import 'package:ikram_task_project/controllers/surah_controller.dart';
+import 'package:ikram_task_project/routes.dart';
 
 void main() async {
-  runApp(const ZulhijayaApp());
+  runApp(const IkramApp());
 }
 
-class ZulhijayaApp extends StatelessWidget {
-  const ZulhijayaApp({Key? key}) : super(key: key);
+class IkramApp extends StatelessWidget {
+  const IkramApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

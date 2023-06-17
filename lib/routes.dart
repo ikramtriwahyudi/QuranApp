@@ -1,9 +1,9 @@
 import 'package:get/route_manager.dart';
-import 'package:zulhijaya_task_project/navigate.dart';
-import 'package:zulhijaya_task_project/pages/home/detail.dart';
+import 'package:ikram_task_project/navigate.dart';
+import 'package:ikram_task_project/pages/home/detail.dart';
 
-import 'package:zulhijaya_task_project/pages/home/index.dart';
-import 'package:zulhijaya_task_project/pages/login/index.dart';
+import 'package:ikram_task_project/pages/home/index.dart';
+import 'package:ikram_task_project/pages/login/index.dart';
 
 List<GetPage> routes = [
   GetPage(name: '/', page: () => const Navigate()),

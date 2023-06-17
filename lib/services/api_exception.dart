@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zulhijaya_task_project/services/auth.dart';
+import 'package:ikram_task_project/services/auth.dart';
 
 class APIException implements Exception {
   final DioError error;

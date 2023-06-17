@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:zulhijaya_task_project/controllers/quran_controller.dart';
-import 'package:zulhijaya_task_project/controllers/surah_controller.dart';
+import 'package:ikram_task_project/controllers/quran_controller.dart';
+import 'package:ikram_task_project/controllers/surah_controller.dart';
 
 class DetailBlogPage extends StatelessWidget {
   const DetailBlogPage({Key? key}) : super(key: key);

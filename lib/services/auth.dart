@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zulhijaya_task_project/apis/auth.dart';
-import 'package:zulhijaya_task_project/services/api.dart';
+import 'package:ikram_task_project/apis/auth.dart';
+import 'package:ikram_task_project/services/api.dart';
 
 class Auth {
   static login({String? email, String? password}) async {

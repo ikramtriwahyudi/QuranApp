@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:zulhijaya_task_project/models/ayat_model.dart';
+import 'package:ikram_task_project/models/ayat_model.dart';
 
 part 'surah_model.g.dart';
 
