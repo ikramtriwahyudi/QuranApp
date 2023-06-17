@@ -1,121 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:zulhijaya_task_project/components/alert.dart';
-import 'package:zulhijaya_task_project/components/loading.dart';
-import 'package:zulhijaya_task_project/controllers/blog_test_controller.dart';
+
+import 'package:zulhijaya_task_project/controllers/quran_controller.dart';
+import 'package:zulhijaya_task_project/controllers/surah_controller.dart';
 
 class DetailBlogPage extends StatelessWidget {
   const DetailBlogPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Get.find<SurahController>().getDetail.toString();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: const Text('Detail Blog'),
-        actions: [
-          PopupMenuButton(
-            key: const Key('detail_action_button'),
-            itemBuilder: ((context) => [
-                  PopupMenuItem(
-                    key: const Key('detail_action_button_edit'),
-                    onTap: () => Future.delayed(
-                      const Duration(milliseconds: 100),
-                      () => Get.toNamed('/home/edit'),
-                    ),
-                    child: const Text('Edit'),
-                  ),
-                  PopupMenuItem(
-                    key: const Key('detail_action_button_delete'),
-                    onTap: () => Future.delayed(
-                      const Duration(milliseconds: 100),
-                      () async {
-                        showLoading(context, 'Deleting...');
-                        try {
-                          final id = Get.find<BlogTestController>().blog!.id;
-                          await Get.find<BlogTestController>().del(id);
-                          await Get.find<BlogTestController>().clearBlog();
-                          Get.offNamedUntil('/home', (route) => false);
-                        } catch (e) {
-                          Get.back();
-                          showAlert(context, e.toString());
-                        }
-                      },
-                    ),
-                    child: const Text('Delete'),
-                  ),
-                ]),
-          )
-        ],
+        title: GetBuilder<QuranController>(builder: (con) {
+          return Text(con.item!.name.toString());
+        }),
       ),
-      body: GetBuilder<BlogTestController>(
-        builder: (controller) => controller.blog == null
-            ? const Center(child: CircularProgressIndicator())
-            : Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: ListView(
-                  children: [
-                    Text(
-                      'Title',
-                      style: Theme.of(context).textTheme.caption,
+      body: Center(
+        child: GetBuilder<SurahController>(
+            init: SurahController(),
+            builder: (controller) {
+              if (controller.item == null) {
+                return const CircularProgressIndicator();
+              }
+
+              return ListView.separated(
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: controller.item!.ayahs.length,
+                itemBuilder: (context, index) {
+                  final ayat = controller.item!.ayahs[index];
+
+                  return InkWell(
+                      child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          ayat.ayahText,
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.end,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(ayat.readText.toString()),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          ayat.indoText,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
                     ),
-                    Text(
-                      controller.blog!.title.toString(),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Description',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Text(
-                      controller.blog!.description.toString(),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Status',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Text(
-                      controller.blog!.status.toString(),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Created At',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Text(
-                      controller.blog?.dateCreated == null
-                          ? '-'
-                          : DateFormat('d/M/y H:m').format(
-                              DateTime.parse(
-                                controller.blog!.dateCreated.toString(),
-                              ),
-                            ),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Last Update',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Text(
-                      controller.blog?.dateUpdated == null
-                          ? '-'
-                          : DateFormat('d/M/y H:m').format(
-                              DateTime.parse(
-                                controller.blog!.dateUpdated.toString(),
-                              ),
-                            ),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ),
+                  ));
+                },
+              );
+            }),
       ),
     );
   }

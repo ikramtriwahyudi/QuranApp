@@ -9,7 +9,7 @@ class Navigate extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<void> navigate() async {
       await Auth.loadToken();
-      await Auth.loggedIn() ? Get.offNamed('/home') : Get.offNamed('/login');
+      await Auth.loggedIn() ? Get.offNamed('/home') : Get.offNamed('/home');
     }
 
     return FutureBuilder(

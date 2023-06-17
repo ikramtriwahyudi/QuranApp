@@ -19,7 +19,7 @@ class API {
   int? get authTokenExpire => _authTokenExpire;
 
   BaseOptions options = BaseOptions(
-    baseUrl: 'https://api.endpoint.com',
+    baseUrl: 'https://quranapi.idn.sch.id',
   );
 
   setAuth({String? authType, String? accessToken, int? expire}) {
@@ -39,8 +39,8 @@ class API {
     return this;
   }
 
-  client() {
+  Dio client() {
     _client = Dio(options);
-    return _client;
+    return _client!;
   }
 }

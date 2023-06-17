@@ -6,6 +6,7 @@ import 'package:zulhijaya_task_project/components/alert.dart';
 import 'package:zulhijaya_task_project/components/loading.dart';
 import 'package:zulhijaya_task_project/components/rounded_passwordfield.dart';
 import 'package:zulhijaya_task_project/components/rounded_textfield.dart';
+import 'package:zulhijaya_task_project/services/api.dart';
 import 'package:zulhijaya_task_project/services/auth.dart';
 
 class LoginPage extends StatelessWidget {
@@ -51,6 +52,7 @@ class LoginPage extends StatelessWidget {
                         try {
                           _formKey.currentState?.save();
                           if (_formKey.currentState!.validate()) {
+                            await API().client().get('produk');
                             await Auth.login(
                               email: _formKey.currentState!.value['email'],
                               password:

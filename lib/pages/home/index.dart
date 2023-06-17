@@ -1,76 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zulhijaya_task_project/controllers/blog_test_controller.dart';
-import 'package:zulhijaya_task_project/services/auth.dart';
 
-class HomePage extends StatelessWidget {
+import '../../controllers/quran_controller.dart';
+import '../../controllers/surah_controller.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
-    Get.find<BlogTestController>().list();
+    Get.find<QuranController>().list();
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'List Blogs',
-          key: Key('home_title'),
-        ),
-        actions: [
-          PopupMenuButton(
-            key: const Key('home_action_button'),
-            itemBuilder: ((context) => [
-                  PopupMenuItem(
-                    key: const Key('home_action_button_edit'),
-                    onTap: () async {
-                      await Get.find<BlogTestController>().clearBlog();
-                      await Future.delayed(
-                        const Duration(milliseconds: 100),
-                        () => Get.toNamed('/home/edit'),
+      body: Center(
+        child: GetBuilder<QuranController>(builder: (controller) {
+          if (controller.items == null) {
+            return const CircularProgressIndicator();
+          }
+
+          return Padding(
+            padding: const EdgeInsets.only(top: 15, right: 20, left: 20),
+            child: Column(
+              children: [
+                Container(
+                  height: 200,
+                  width: 200,
+                  color: Colors.amber,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 60,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      hintText: "Cari Surah",
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    key: const Key('home_list_blogs'),
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemCount: controller.items!.length,
+                    itemBuilder: (context, index) {
+                      final item = controller.items![index];
+
+                      return InkWell(
+                        onTap: () {
+                          Get.find<QuranController>().setItem(item);
+                          Get.find<SurahController>()
+                              .getDetail(item.number.toString());
+                          Get.toNamed('/home/detail');
+                        },
+                        child: ListTile(
+                          title: Text(item.name.toString()),
+                          subtitle: Text(item.translationId.toString()),
+                          trailing: Text(
+                            item.asma.toString(),
+                            style: const TextStyle(fontSize: 28),
+                          ),
+                          leading: Text(item.number.toString(),
+                              style: const TextStyle(fontSize: 18)),
+                        ),
                       );
                     },
-                    child: const Text('Add New'),
                   ),
-                  PopupMenuItem(
-                    key: const Key('home_action_button_logout'),
-                    onTap: () async {
-                      await Auth.logout();
-                      Get.offAllNamed('/');
-                    },
-                    child: const Text('Logout'),
-                  ),
-                ]),
-          )
-        ],
-      ),
-      body: Center(
-        child: GetBuilder<BlogTestController>(
-            init: BlogTestController(),
-            builder: (controller) {
-              if (controller.blogs == null) {
-                return const CircularProgressIndicator();
-              }
-
-              return ListView.separated(
-                key: const Key('home_list_blogs'),
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: controller.blogs!.length,
-                itemBuilder: (context, index) {
-                  final blog = controller.blogs![index];
-                  return InkWell(
-                    onTap: () {
-                      Get.find<BlogTestController>().setBlog(blog);
-                      Get.toNamed('/home/detail');
-                    },
-                    child: ListTile(
-                      title: Text(blog.title.toString()),
-                      subtitle: Text(blog.description.toString()),
-                    ),
-                  );
-                },
-              );
-            }),
+                )
+              ],
+            ),
+          );
+        }),
       ),
     );
   }

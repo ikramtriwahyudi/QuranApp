@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zulhijaya_task_project/controllers/blog_test_controller.dart';
+
+import 'package:zulhijaya_task_project/controllers/quran_controller.dart';
+import 'package:zulhijaya_task_project/controllers/surah_controller.dart';
 import 'package:zulhijaya_task_project/routes.dart';
 
 void main() async {
@@ -13,7 +15,8 @@ class ZulhijayaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(BlogTestController());
+    Get.put(SurahController());
+    Get.put(QuranController());
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
