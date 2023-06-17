@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-import 'package:zulhijaya_task_project/models/surah_model.dart';
-import 'package:zulhijaya_task_project/services/api.dart';
+import 'package:ikram_task_project/models/surah_model.dart';
+import 'package:ikram_task_project/services/api.dart';
 
 class SurahController extends GetxController {
   SurahModel? _item;

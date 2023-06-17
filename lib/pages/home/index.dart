@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Get.find<QuranController>().list();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: GetBuilder<QuranController>(builder: (controller) {
           if (controller.items == null) {
@@ -25,33 +26,42 @@ class _HomePageState extends State<HomePage> {
           return Padding(
             padding: const EdgeInsets.only(top: 15, right: 20, left: 20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  height: 200,
-                  width: 200,
-                  color: Colors.amber,
+                Padding(padding: EdgeInsets.only(top: 50)),
+                Text("Assalamualaikum"),
+                Text("Selamat Datang Di Quran App"),
+                Image.asset(
+                  "assets/6630675.jpg",
+                  scale: 7,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Container(
                   height: 60,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      hintText: "Cari Surah",
-                    ),
-                  ),
+                  child: GetBuilder<QuranController>(
+                      init: QuranController(),
+                      builder: (con) {
+                        return TextField(
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.search),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            hintText: "Cari Surah",
+                          ),
+                          onChanged: (value) => con.filterlist(value),
+                        );
+                      }),
                 ),
                 Expanded(
                   child: ListView.separated(
                     key: const Key('home_list_blogs'),
                     separatorBuilder: (context, index) => const Divider(),
-                    itemCount: controller.items!.length,
+                    itemCount: controller.filteritems!.length,
                     itemBuilder: (context, index) {
-                      final item = controller.items![index];
+                      final item = controller.filteritems![index];
 
                       return InkWell(
                         onTap: () {
