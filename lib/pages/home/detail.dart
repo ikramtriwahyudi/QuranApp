@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ikram_task_project/components/alert.dart';
 
 import 'package:ikram_task_project/controllers/quran_controller.dart';
 import 'package:ikram_task_project/controllers/surah_controller.dart';
@@ -18,12 +19,13 @@ class DetailBlogPage extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        title: GetBuilder<QuranController>(builder: (con) {
-          return Text(
-            con.item!.name.toString(),
-            style: const TextStyle(color: Colors.black),
-          );
-        }),
+
+        // title: GetBuilder<QuranController>(builder: (con) {
+        //   return Text(
+        //     con.item!.name.toString(),
+        //     style: const TextStyle(color: Colors.black),
+        //   );
+        // }),
       ),
       body: Center(
         child: GetBuilder<SurahController>(
@@ -40,7 +42,7 @@ class DetailBlogPage extends StatelessWidget {
                     width: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color(0xffFFFAF5),
+                      color: const Color(0xffFFFAF5),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -51,12 +53,34 @@ class DetailBlogPage extends StatelessWidget {
                       ],
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         GetBuilder<QuranController>(builder: (controller) {
-                          return Text(controller.item!.name.toString());
-                        })
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Surah",
+                                style: TextStyle(
+                                    fontSize: 25, color: Color(0XFFecb67a)),
+                              ),
+                              Text(
+                                controller.item!.name.toString(),
+                                style: const TextStyle(
+                                    fontSize: 30, color: Color(0XFFecb67a)),
+                              ),
+                            ],
+                          );
+                        }),
+                        Image.asset(
+                          "assets/detail.png",
+                          scale: 3,
+                        ),
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   Expanded(
                     child: ListView.separated(
