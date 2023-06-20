@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,39 +43,44 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  height: 200,
-                  width: 400,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xffFFFAF5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1.5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3),
-                        )
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text(
-                          "My Quran",
-                          style:
-                              TextStyle(fontSize: 30, color: Color(0XFFecb67a)),
-                        ),
-                        Image.asset("assets/6628329.jpg")
-                      ],
+                GestureDetector(
+                  onTap: () {
+                    log("message");
+                  },
+                  child: Container(
+                    height: 200,
+                    width: 400,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color(0xffFFFAF5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1.5,
+                            blurRadius: 7,
+                            offset: const Offset(0, 3),
+                          )
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text(
+                            "My Quran",
+                            style: TextStyle(
+                                fontSize: 30, color: Color(0XFFecb67a)),
+                          ),
+                          Image.asset("assets/6628329.jpg")
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   height: 60,
                   child: GetBuilder<QuranController>(
                       init: QuranController(),
@@ -104,20 +111,39 @@ class _HomePageState extends State<HomePage> {
                               .getDetail(item.number.toString());
                           Get.toNamed('/home/detail');
                         },
-                        child: ListTile(
-                          title: Text(item.name.toString()),
-                          subtitle: Text(item.translationId.toString()),
-                          trailing: Text(
-                            item.asma.toString(),
-                            style: const TextStyle(fontSize: 28),
-                          ),
-                          leading: Text(item.number.toString(),
-                              style: const TextStyle(fontSize: 18)),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text(item.name.toString()),
+                              subtitle: Text(item.translationId.toString()),
+                              trailing: Text(
+                                item.asma.toString(),
+                                style: const TextStyle(fontSize: 28),
+                              ),
+                              leading: Container(
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(40),
+                                    color: const Color(0XFFecb67a)),
+                                child: Center(
+                                  child: Text(
+                                    item.number.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 15, color: Colors.black87),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Divider(
+                              color: Colors.black,
+                            )
+                          ],
                         ),
                       );
                     },
                   ),
-                )
+                ),
               ],
             ),
           );

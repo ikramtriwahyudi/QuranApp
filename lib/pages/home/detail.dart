@@ -27,7 +27,12 @@ class DetailBlogPage extends StatelessWidget {
               }
 
               return ListView.separated(
-                separatorBuilder: (context, index) => const Divider(),
+                separatorBuilder: (context, index) => const Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Divider(
+                    color: Colors.black,
+                  ),
+                ),
                 itemCount: controller.item!.ayahs.length,
                 itemBuilder: (context, index) {
                   final ayat = controller.item!.ayahs[index];
@@ -41,13 +46,16 @@ class DetailBlogPage extends StatelessWidget {
                         Text(
                           ayat.ayahText,
                           style: const TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
+                            fontSize: 25,
+                          ),
                           textAlign: TextAlign.end,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(ayat.readText.toString()),
+                        Text(
+                          ayat.readText.toString(),
+                        ),
                         const SizedBox(
                           height: 10,
                         ),

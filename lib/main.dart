@@ -20,9 +20,9 @@ class IkramApp extends StatelessWidget {
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Zulhijaya',
+      title: 'Ikram',
       theme: ThemeData(
-        fontFamily: GoogleFonts.lexendDeca().fontFamily,
+        fontFamily: GoogleFonts.poppins().fontFamily,
         primarySwatch: Colors.deepOrange,
       ),
       initialRoute: '/',
