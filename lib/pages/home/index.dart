@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                                 fontSize: 30, color: Color(0XFFecb67a)),
                           ),
-                          Image.asset("assets/6628329.jpg")
+                          Image.asset("assets/home.jpg")
                         ],
                       ),
                     ),
@@ -87,11 +87,11 @@ class _HomePageState extends State<HomePage> {
                       builder: (con) {
                         return TextField(
                           decoration: InputDecoration(
-                            suffixIcon: const Icon(Icons.search),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            hintText: "Cari Surah",
-                          ),
+                              suffixIcon: const Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              hintText: "Cari Surah",
+                              fillColor: Color(0XFFecb67a)),
                           onChanged: (value) => con.filterlist(value),
                         );
                       }),
