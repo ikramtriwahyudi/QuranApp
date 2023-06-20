@@ -41,7 +41,7 @@ class DetailBlogPage extends StatelessWidget {
                         Text(
                           ayat.ayahText,
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 25, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.end,
                         ),
                         const SizedBox(

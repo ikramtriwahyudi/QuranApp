@@ -29,6 +29,7 @@ class QuranController extends GetxController {
     update();
   }
 
+  //function pencarian
   Future<void> filterlist(String keyword) async {
     _filteritems = _items
         ?.where((element) =>

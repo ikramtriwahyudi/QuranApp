@@ -26,18 +26,52 @@ class _HomePageState extends State<HomePage> {
           return Padding(
             padding: const EdgeInsets.only(top: 15, right: 20, left: 20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(padding: EdgeInsets.only(top: 50)),
-                Text("Assalamualaikum"),
-                Text("Selamat Datang Di Quran App"),
-                Image.asset(
-                  "assets/6630675.jpg",
-                  scale: 7,
+                const Padding(padding: EdgeInsets.only(top: 50)),
+                const Text(
+                  "Assalamualaikum",
+                  style: TextStyle(fontSize: 25),
                 ),
-                SizedBox(
-                  height: 10,
+                const Text(
+                  "Selamat Datang Di Quran App",
+                  style: TextStyle(fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 200,
+                  width: 400,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xffFFFAF5),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1.5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        )
+                      ]),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Text(
+                          "My Quran",
+                          style:
+                              TextStyle(fontSize: 30, color: Color(0XFFecb67a)),
+                        ),
+                        Image.asset("assets/6628329.jpg")
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 Container(
                   height: 60,
@@ -46,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (con) {
                         return TextField(
                           decoration: InputDecoration(
-                            suffixIcon: Icon(Icons.search),
+                            suffixIcon: const Icon(Icons.search),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             hintText: "Cari Surah",

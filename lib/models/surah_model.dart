@@ -16,6 +16,7 @@ class SurahModel {
   final int number;
   final int numberOfAyahs;
   final List<AyatModel> ayahs;
+
   static fromList(List<dynamic> json) {
     return json.map((data) => SurahModel.fromJson(data)).toList();
   }
