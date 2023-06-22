@@ -1,15 +1,23 @@
-import 'dart:ui';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ikram_task_project/components/alert.dart';
+
 import 'package:ikram_task_project/preference/color_palette.dart';
 
 import 'package:ikram_task_project/controllers/quran_controller.dart';
 import 'package:ikram_task_project/controllers/surah_controller.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-class DetailBlogPage extends StatelessWidget {
-  const DetailBlogPage({Key? key}) : super(key: key);
+class DetailBlogPage extends StatefulWidget {
+  DetailBlogPage({Key? key}) : super(key: key);
+
+  @override
+  State<DetailBlogPage> createState() => _DetailBlogPageState();
+}
+
+class _DetailBlogPageState extends State<DetailBlogPage> {
+  bool play = true;
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +86,6 @@ class DetailBlogPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   Expanded(
                     child: ListView.separated(
                       separatorBuilder: (context, index) => const Padding(
@@ -100,15 +105,54 @@ class DetailBlogPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
-                                height: 40,
+                                height: 70,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     color: ColorPalette.secondaryColor),
-                                child: Row(children: [Container()]),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(20),
+                                      height: 60,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: ColorPalette.threeColor),
+                                      child: Center(
+                                        child: Text(
+                                          ayat.verseId.toString(),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: ColorPalette.primaryColor),
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          // log("message");
+                                          play = !play;
+                                        });
+                                      },
+                                      child: play == true
+                                          ? const Icon(
+                                              Icons.play_arrow,
+                                              size: 50,
+                                            )
+                                          : const Icon(
+                                              Icons.pause,
+                                              size: 50,
+                                            ),
+                                    ),
+                                  ],
+                                ),
                               ),
                               const SizedBox(
-                                height: 5,
+                                height: 10,
                               ),
                               Text(
                                 ayat.ayahText,

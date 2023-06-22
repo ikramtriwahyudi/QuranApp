@@ -9,5 +9,5 @@ List<GetPage> routes = [
   GetPage(name: '/', page: () => const Navigate()),
   GetPage(name: '/login', page: () => LoginPage()),
   GetPage(name: '/home', page: () => const HomePage()),
-  GetPage(name: '/home/detail', page: () => const DetailBlogPage()),
+  GetPage(name: '/home/detail', page: () => DetailBlogPage()),
 ];
