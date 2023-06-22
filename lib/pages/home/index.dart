@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/quran_controller.dart';
 import '../../controllers/surah_controller.dart';
+import '../../preference/color_palette.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                     width: 400,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: const Color(0xffFFFAF5),
+                        color: ColorPalette.primaryColor,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
@@ -69,7 +70,9 @@ class _HomePageState extends State<HomePage> {
                           const Text(
                             "My Quran",
                             style: TextStyle(
-                                fontSize: 30, color: Color(0XFFecb67a)),
+                                fontSize: 30,
+                                color: ColorPalette.secondaryColor,
+                                fontWeight: FontWeight.bold),
                           ),
                           Image.asset("assets/home.jpg")
                         ],
@@ -91,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               hintText: "Cari Surah",
-                              fillColor: Color(0XFFecb67a)),
+                              fillColor: ColorPalette.secondaryColor),
                           onChanged: (value) => con.filterlist(value),
                         );
                       }),
@@ -125,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                 width: 45,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(40),
-                                    color: const Color(0XFFecb67a)),
+                                    color: ColorPalette.secondaryColor),
                                 child: Center(
                                   child: Text(
                                     item.number.toString(),

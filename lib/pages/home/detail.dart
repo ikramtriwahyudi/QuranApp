@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ikram_task_project/components/alert.dart';
+import 'package:ikram_task_project/preference/color_palette.dart';
 
 import 'package:ikram_task_project/controllers/quran_controller.dart';
 import 'package:ikram_task_project/controllers/surah_controller.dart';
@@ -15,17 +16,11 @@ class DetailBlogPage extends StatelessWidget {
     Get.find<SurahController>().getDetail.toString();
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 80,
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-
-        // title: GetBuilder<QuranController>(builder: (con) {
-        //   return Text(
-        //     con.item!.name.toString(),
-        //     style: const TextStyle(color: Colors.black),
-        //   );
-        // }),
       ),
       body: Center(
         child: GetBuilder<SurahController>(
@@ -42,7 +37,7 @@ class DetailBlogPage extends StatelessWidget {
                     width: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xffFFFAF5),
+                      color: ColorPalette.primaryColor,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -62,12 +57,16 @@ class DetailBlogPage extends StatelessWidget {
                               const Text(
                                 "Surah",
                                 style: TextStyle(
-                                    fontSize: 25, color: Color(0XFFecb67a)),
+                                    fontSize: 25,
+                                    color: ColorPalette.secondaryColor,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 controller.item!.name.toString(),
                                 style: const TextStyle(
-                                    fontSize: 30, color: Color(0XFFecb67a)),
+                                    fontSize: 30,
+                                    color: ColorPalette.secondaryColor,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           );
@@ -100,6 +99,17 @@ class DetailBlogPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
+                              Container(
+                                height: 40,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: ColorPalette.secondaryColor),
+                                child: Row(children: [Container()]),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
                               Text(
                                 ayat.ayahText,
                                 style: const TextStyle(
