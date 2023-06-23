@@ -13,6 +13,7 @@ AyatModel _$AyatModelFromJson(Map<String, dynamic> json) => AyatModel(
       page: json['page'] as int,
       juz: json['juz'] as int,
       readText: json['readText'] as String,
+      audio: json['audio'] as String,
     );
 
 Map<String, dynamic> _$AyatModelToJson(AyatModel instance) => <String, dynamic>{
@@ -22,4 +23,5 @@ Map<String, dynamic> _$AyatModelToJson(AyatModel instance) => <String, dynamic>{
       'page': instance.page,
       'juz': instance.juz,
       'readText': instance.readText,
+      'audio': instance.audio,
     };

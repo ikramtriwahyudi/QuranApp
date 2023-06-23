@@ -11,6 +11,7 @@ class AyatModel {
     required this.page,
     required this.juz,
     required this.readText,
+    required this.audio,
   });
 
   final int verseId;
@@ -19,6 +20,7 @@ class AyatModel {
   final int page;
   final int juz;
   final String readText;
+  final String audio;
   static fromList(List<dynamic> json) {
     return json.map((data) => AyatModel.fromJson(data)).toList();
   }

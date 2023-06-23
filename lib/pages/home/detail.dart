@@ -10,18 +10,33 @@ import 'package:ikram_task_project/controllers/surah_controller.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class DetailBlogPage extends StatefulWidget {
-  DetailBlogPage({Key? key}) : super(key: key);
+  const DetailBlogPage({Key? key}) : super(key: key);
 
   @override
   State<DetailBlogPage> createState() => _DetailBlogPageState();
 }
 
 class _DetailBlogPageState extends State<DetailBlogPage> {
-  bool play = true;
+  AudioPlayer audioPlayer = AudioPlayer();
+  bool play = false;
+  int playingVerseId = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    audioPlayer.onPlayerStateChanged.listen((state) {
+      if (state == PlayerState.completed) {
+        setState(() {
+          play = false;
+          playingVerseId = 0;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    Get.find<SurahController>().getDetail.toString();
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 80,
@@ -29,6 +44,11 @@ class _DetailBlogPageState extends State<DetailBlogPage> {
         foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
+        title: const Text(
+          "Detail",
+          style: TextStyle(
+              color: ColorPalette.threeColor, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Center(
         child: GetBuilder<SurahController>(
@@ -125,29 +145,33 @@ class _DetailBlogPageState extends State<DetailBlogPage> {
                                       child: Center(
                                         child: Text(
                                           ayat.verseId.toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: ColorPalette.primaryColor),
                                         ),
                                       ),
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          // log("message");
-                                          play = !play;
-                                        });
-                                      },
-                                      child: play == true
-                                          ? const Icon(
-                                              Icons.play_arrow,
-                                              size: 50,
-                                            )
-                                          : const Icon(
-                                              Icons.pause,
-                                              size: 50,
-                                            ),
-                                    ),
+                                    CircleAvatar(
+                                      radius: 35,
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          if (play) {
+                                            await audioPlayer.pause();
+                                          } else {
+                                            String tes = ayat.audio;
+                                            audioPlayer.play(UrlSource(tes));
+                                          }
+                                          setState(() {
+                                            play = !play;
+                                            playingVerseId = ayat.verseId;
+                                          });
+                                        },
+                                        icon: Icon(play == true &&
+                                                playingVerseId == ayat.verseId
+                                            ? Icons.pause
+                                            : Icons.play_arrow),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
