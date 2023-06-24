@@ -22,10 +22,6 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       body: Center(
         child: GetBuilder<QuranController>(builder: (controller) {
-          if (controller.items == null) {
-            return const CircularProgressIndicator();
-          }
-
           return Padding(
             padding: const EdgeInsets.only(top: 15, right: 20, left: 20),
             child: Column(
@@ -44,39 +40,34 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    log("message");
-                  },
-                  child: Container(
-                    height: 200,
-                    width: 400,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: ColorPalette.primaryColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1.5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          )
-                        ]),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text(
-                            "My Quran",
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: ColorPalette.secondaryColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Image.asset("assets/home.jpg")
-                        ],
-                      ),
+                Container(
+                  height: 200,
+                  width: 400,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: ColorPalette.primaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1.5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        )
+                      ]),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Text(
+                          "My Qur'an",
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: ColorPalette.secondaryColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Image.asset("assets/home.jpg")
+                      ],
                     ),
                   ),
                 ),
@@ -101,12 +92,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   child: ListView.separated(
-                    key: const Key('home_list_blogs'),
                     separatorBuilder: (context, index) => const Divider(),
-                    itemCount: controller.filteritems!.length,
+                    itemCount: controller.filteritems?.length ?? 0,
                     itemBuilder: (context, index) {
+                      if (controller.items == null) {
+                        return const CircularProgressIndicator();
+                      }
                       final item = controller.filteritems![index];
-
                       return InkWell(
                         onTap: () {
                           Get.find<QuranController>().setItem(item);

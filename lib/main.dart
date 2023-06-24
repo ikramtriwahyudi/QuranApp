@@ -23,7 +23,6 @@ class IkramApp extends StatelessWidget {
       title: 'Ikram',
       theme: ThemeData(
         fontFamily: GoogleFonts.poppins().fontFamily,
-        primarySwatch: Colors.deepOrange,
       ),
       initialRoute: '/',
       getPages: routes,

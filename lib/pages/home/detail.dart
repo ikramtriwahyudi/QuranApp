@@ -106,6 +106,10 @@ class _DetailBlogPageState extends State<DetailBlogPage> {
                       ],
                     ),
                   ),
+                  const Divider(
+                    height: 15,
+                    color: Colors.transparent,
+                  ),
                   Expanded(
                     child: ListView.separated(
                       separatorBuilder: (context, index) => const Padding(
@@ -128,32 +132,51 @@ class _DetailBlogPageState extends State<DetailBlogPage> {
                                 height: 70,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: ColorPalette.secondaryColor),
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: ColorPalette.primaryColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: const Offset(0, 5),
+                                    ),
+                                  ],
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(20),
-                                      height: 60,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          color: ColorPalette.threeColor),
-                                      child: Center(
-                                        child: Text(
-                                          ayat.verseId.toString(),
-                                          style: const TextStyle(
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 190),
+                                      child: Container(
+                                        height: 60,
+                                        width: 60,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: ColorPalette.threeColor),
+                                        child: Center(
+                                          child: Text(
+                                            ayat.verseId.toString(),
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              color: ColorPalette.primaryColor),
+                                              color: ColorPalette.primaryColor,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                    CircleAvatar(
-                                      radius: 35,
-                                      child: IconButton(
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            ),
+                                            backgroundColor:
+                                                ColorPalette.threeColor,
+                                            fixedSize: const Size(60, 60)),
                                         onPressed: () async {
                                           if (play) {
                                             await audioPlayer.pause();
@@ -166,12 +189,10 @@ class _DetailBlogPageState extends State<DetailBlogPage> {
                                             playingVerseId = ayat.verseId;
                                           });
                                         },
-                                        icon: Icon(play == true &&
+                                        child: Icon(play == true &&
                                                 playingVerseId == ayat.verseId
                                             ? Icons.pause
-                                            : Icons.play_arrow),
-                                      ),
-                                    )
+                                            : Icons.play_arrow)),
                                   ],
                                 ),
                               ),
